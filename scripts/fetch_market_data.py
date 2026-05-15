@@ -138,8 +138,8 @@ def fetch_fixed_income():
     us_10y = fred_latest("DGS10")    # 10-Year
     us_30y = fred_latest("DGS30")    # 30-Year
     # Soberanos europeos (serie mensual OCDE/FRED)
-    de_10y = fred_latest("IRLTLT01DEM156N")  # Alemania 10Y
-    es_10y = fred_latest("IRLTLT01ESM156N")  # España 10Y
+    _de = fred_latest("IRLTLT01DEM156N"); de_10y = round(_de, 2) if _de else None
+    _es = fred_latest("IRLTLT01ESM156N"); es_10y = round(_es, 2) if _es else None
 
     print(f"   US 3M={us_3m}  2Y={us_2y}  5Y={us_5y}  10Y={us_10y}  30Y={us_30y}")
     print(f"   DE 10Y={de_10y}  ES 10Y={es_10y}")
@@ -223,17 +223,13 @@ def fetch_macro():
 
     print(f"   US CPI YoY={us_cpi}%  Core={us_cpi_core}%")
 
-    # ── IPC Eurozona (HICP, nivel 2015=100) ───────────────────────────────────
-    # FRED series: HICPREA — HICP: All Items for Euro Area (2015=100, Monthly, NSA)
-    eu_cpi_raw  = fred_history("HICPREA",    start="1990-01-01")
-    # Core: HICPREA menos energía y alimentos no procesados —
-    # FRED: "CP0000EZ19M086NEST" no siempre disponible, usamos CPGRLE01EZQ086NEST
-    eu_cpi_yoy_hist = yoy_history(eu_cpi_raw)
-    eu_cpi = eu_cpi_yoy_hist[-1]["value"] if eu_cpi_yoy_hist else None
-
+    # ── IPC Eurozona (HICP YoY directo) ──────────────────────────────────────
+    # CPHPTT01EZM659N = HICP Total for Euro Area, YoY % (Monthly, NSA)
+    eu_cpi_yoy_raw = fred_history("CPHPTT01EZM659N", start="1990-01-01")
+    eu_cpi = round(eu_cpi_yoy_raw[-1]["value"], 2) if eu_cpi_yoy_raw else None
     eu_cpi_history = [
-        {"date": o["date"], "cpi": o["value"], "core": None}
-        for o in eu_cpi_yoy_hist if o["date"] >= "2000-01-01"
+        {"date": o["date"], "cpi": round(o["value"], 2), "core": None}
+        for o in eu_cpi_yoy_raw if o["date"] >= "2000-01-01"
     ]
     print(f"   EU CPI YoY={eu_cpi}%")
 
