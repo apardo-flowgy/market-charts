@@ -1,0 +1,11 @@
+node_modules/
+dist/
+public/data/*.json
+public/data/*.csv
+.env
+.env.local
+*.local
+__pycache__/
+*.pyc
+.venv/
+myenv/

@@ -1,0 +1,220 @@
+:root {
+  --bg:      #0F1117;
+  --surface: #1A1D27;
+  --border:  #2A2D3A;
+  --text:    #E2E8F0;
+  --muted:   #64748B;
+  --accent:  #3B82F6;
+  --green:   #22C55E;
+  --red:     #EF4444;
+  --radius:  10px;
+  --shadow:  0 2px 8px rgba(0,0,0,0.35);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
+  color: var(--text);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); min-height: 100vh; }
+button { font: inherit; cursor: pointer; }
+
+/* ── Header ── */
+.app-header {
+  background: #080A10;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-brand { display: flex; align-items: center; gap: 12px; }
+.header-logo  { font-size: 1.25rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+.header-logo span { color: var(--accent); }
+
+.header-meta  { font-size: 0.75rem; color: var(--muted); text-align: right; line-height: 1.5; }
+.header-meta strong { color: var(--text); font-size: 0.82rem; }
+
+/* ── Nav tabs ── */
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.nav-tab {
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.nav-tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.nav-tab.active { background: var(--accent); color: #fff; font-weight: 600; }
+
+/* ── Main ── */
+.app-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 28px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Section eyebrow ── */
+.section-eyebrow {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* ── Chart card ── */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: var(--shadow);
+}
+
+.chart-card-header { margin-bottom: 18px; }
+.chart-card-header h2 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.chart-card-header p  { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+.chart-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.chart-note { font-size: 0.78rem; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+
+/* ── Chart grid ── */
+.chart-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.chart-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── Metric chips (header row) ── */
+.metric-strip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.metric-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 18px;
+  min-width: 140px;
+}
+
+.metric-chip-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+.metric-chip-value { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; }
+.metric-chip-sub   { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+.text-green { color: var(--green); }
+.text-red   { color: var(--red); }
+.text-blue  { color: var(--accent); }
+
+/* ── Chart SVG ── */
+.chart-svg { width: 100%; height: auto; display: block; }
+
+/* ── Placeholder ── */
+.chart-placeholder {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.chart-placeholder-icon { font-size: 2rem; opacity: 0.4; }
+
+/* ── Legend ── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.legend-item { display: flex; align-items: center; gap: 7px; }
+.legend-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legend-line  { width: 20px; height: 2px; flex-shrink: 0; }
+
+/* ── Loading ── */
+.loading {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ── Footer ── */
+.app-footer {
+  background: #080A10;
+  border-top: 1px solid var(--border);
+  padding: 16px 0;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-text { font-size: 0.75rem; color: var(--muted); }
+.footer-text a { color: var(--muted); text-decoration: none; }
+.footer-text a:hover { color: var(--text); }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .chart-grid-2, .chart-grid-3 { grid-template-columns: 1fr; }
+  .header-inner { flex-wrap: wrap; }
+  .app-main { padding: 20px 16px 60px; }
+  .nav-tabs { flex-wrap: wrap; }
+}
