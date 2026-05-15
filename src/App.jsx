@@ -14,6 +14,8 @@ const TABS = [
   { id: "sectors",  label: "Sectores" },
 ];
 
+const BASE = import.meta.env.BASE_URL;
+
 // ── Placeholder component ─────────────────────────────────────────────────────
 function ChartPlaceholder({ label }) {
   return (
@@ -22,6 +24,17 @@ function ChartPlaceholder({ label }) {
       <span>{label}</span>
       <span style={{ fontSize: "0.72rem", opacity: 0.6 }}>Próximamente</span>
     </div>
+  );
+}
+
+// ── PNG chart image ───────────────────────────────────────────────────────────
+function ChartImage({ file, alt }) {
+  return (
+    <img
+      src={`${BASE}charts/${encodeURIComponent(file)}`}
+      alt={alt}
+      style={{ width: "100%", height: "auto", display: "block", borderRadius: "6px" }}
+    />
   );
 }
 
@@ -66,48 +79,88 @@ function TabEquity({ data }) {
         <MetricChip label="MSCI Europe P/E Fwd" value={eq.msci_eu_pe_fwd ? fmtNum(eq.msci_eu_pe_fwd) + "x" : null} sub="Forward 12m" />
       </div>
 
-      {/* Curva de PER ponderado */}
-      <ChartCard
-        title="Distribución del P/E ponderado por índice"
-        subtitle="Para cada índice, % de peso acumulado vs P/E forward de los componentes ordenados de menor a mayor"
-        note="Fuente: LSEG Refinitiv · datos al último cierre"
-      >
-        <ChartPlaceholder label="Curva P/E ponderado — S&P 500, MSCI World, EM, Europa" />
-      </ChartCard>
-
-      {/* Bull / Bear periods */}
-      <ChartCard
-        title="Periodos alcistas y bajistas — MSCI World"
-        subtitle="Precio del índice con áreas coloreadas según fase de mercado (≥20% desde mínimo = bull, ≤-20% desde máximo = bear)"
-        note="Fuente: LSEG Refinitiv"
-      >
-        <ChartPlaceholder label="Bull / Bear market periods" />
-      </ChartCard>
-
-      {/* Grid 2 columnas */}
+      {/* P/E histórico por índice — 2 columnas */}
+      <p className="section-eyebrow">P/E histórico por índice</p>
       <div className="chart-grid-2">
         <ChartCard
-          title="Top 15 market caps por año"
-          subtitle="Las 15 mayores empresas por capitalización en cada año desde 1980"
+          title="S&P 500 — P/E histórico"
+          subtitle="Evolución del P/E y rentabilidad implícita (earnings yield)"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
         >
-          <ChartPlaceholder label="Top 15 market caps — evolución histórica" />
+          <ChartImage file="S&P 500PE.png" alt="S&P 500 P/E histórico" />
+        </ChartCard>
+        <ChartCard
+          title="S&P 500 — Rentabilidad vs P/E"
+          subtitle="Relación entre el nivel de valoración y la rentabilidad posterior"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="S&P 500RETPE.png" alt="S&P 500 rentabilidad vs P/E" />
         </ChartCard>
 
         <ChartCard
-          title="Evolución empleados — grandes empresas S&P 500"
-          subtitle="Número de empleados de las mayores corporaciones a lo largo del tiempo"
+          title="MSCI AC World — P/E histórico"
+          subtitle="Evolución del P/E del índice global de renta variable"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
         >
-          <ChartPlaceholder label="Empleados grandes empresas S&P 500" />
+          <ChartImage file="MSCI AC WORLDPE.png" alt="MSCI World P/E" />
+        </ChartCard>
+        <ChartCard
+          title="MSCI AC World — Rentabilidad vs P/E"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="MSCI AC WORLDRETPE.png" alt="MSCI World rentabilidad vs P/E" />
+        </ChartCard>
+
+        <ChartCard
+          title="MSCI Europe — P/E histórico"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="MSCI EuropePE.png" alt="MSCI Europe P/E" />
+        </ChartCard>
+        <ChartCard
+          title="MSCI Europe — Rentabilidad vs P/E"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="MSCI EuropeRETPE.png" alt="MSCI Europe rentabilidad vs P/E" />
+        </ChartCard>
+
+        <ChartCard
+          title="MSCI Emergentes — P/E histórico"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="MSCI EmergentesPE.png" alt="MSCI EM P/E" />
+        </ChartCard>
+        <ChartCard
+          title="MSCI Emergentes — Rentabilidad vs P/E"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="MSCI EmergentesRETPE.png" alt="MSCI EM rentabilidad vs P/E" />
+        </ChartCard>
+
+        <ChartCard
+          title="Hang Seng — P/E histórico"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="Hang Seng IndexPE.png" alt="Hang Seng P/E" />
+        </ChartCard>
+        <ChartCard
+          title="Hang Seng — Rentabilidad vs P/E"
+          note="Fuente: LSEG Refinitiv · marzo 2025"
+        >
+          <ChartImage file="Hang Seng IndexRETPE.png" alt="Hang Seng rentabilidad vs P/E" />
         </ChartCard>
       </div>
 
-      <ChartCard
-        title="Previsión de beneficios a 5 años"
-        subtitle="Estimaciones de consenso de BPA para los próximos 5 años por índice"
-        note="Basado en estimaciones IBES · Fuente: LSEG Refinitiv"
-      >
-        <ChartPlaceholder label="Forecast BPA 5 años — S&P 500, MSCI World" />
-      </ChartCard>
+      {/* Placeholders para próximos gráficos */}
+      <p className="section-eyebrow" style={{ marginTop: 8 }}>Próximamente</p>
+      <div className="chart-grid-2">
+        <ChartCard title="Top 15 market caps por año" subtitle="Evolución histórica desde 1980">
+          <ChartPlaceholder label="Top 15 market caps" />
+        </ChartCard>
+        <ChartCard title="Curva P/E ponderado por índice" subtitle="Distribución del P/E por peso en el índice">
+          <ChartPlaceholder label="Curva P/E ponderado" />
+        </ChartCard>
+      </div>
     </>
   );
 }
