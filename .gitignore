@@ -2,6 +2,7 @@ node_modules/
 dist/
 public/data/*.json
 public/data/*.csv
+!public/data/market_snapshot.json
 .env
 .env.local
 *.local
