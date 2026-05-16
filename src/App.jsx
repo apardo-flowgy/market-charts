@@ -68,31 +68,31 @@ function YieldCurveChart({ curveNow, curve1y }) {
       {gridYs.map(v => (
         <g key={v}>
           <line x1={PAD.l} x2={W - PAD.r} y1={yPos(v)} y2={yPos(v)}
-                stroke="#2A2D3A" strokeWidth="1" />
+                stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
           <text x={PAD.l - 6} y={yPos(v) + 4} textAnchor="end"
-                fontSize="10" fill="#64748B">{v.toFixed(1)}%</text>
+                fontSize="10" fill="#6B7E93">{v.toFixed(1)}%</text>
         </g>
       ))}
       {/* lines */}
-      {curve1y && <path d={makePath(curve1y)} fill="none" stroke="#64748B" strokeWidth="2" strokeDasharray="5,3" />}
-      <path d={makePath(curveNow)} fill="none" stroke="#3B82F6" strokeWidth="2.5" />
+      {curve1y && <path d={makePath(curve1y)} fill="none" stroke="#4A5A6B" strokeWidth="2" strokeDasharray="5,3" />}
+      <path d={makePath(curveNow)} fill="none" stroke="#3D7FC1" strokeWidth="2" />
       {/* dots hoy */}
       {TENORS.map((t, i) => curveNow[t] != null && (
         <circle key={t} cx={xPos(i)} cy={yPos(curveNow[t])} r="4"
-                fill="#3B82F6" stroke="#0F1117" strokeWidth="1.5" />
+                fill="#3D7FC1" stroke="#111720" strokeWidth="1.5" />
       ))}
       {/* X axis labels */}
       {TENORS.map((t, i) => (
         <text key={t} x={xPos(i)} y={H - 6} textAnchor="middle"
-              fontSize="11" fill="#64748B">{t}</text>
+              fontSize="11" fill="#6B7E93">{t}</text>
       ))}
       {/* legend */}
-      <line x1={W - 120} x2={W - 100} y1={PAD.t + 10} y2={PAD.t + 10} stroke="#3B82F6" strokeWidth="2.5" />
-      <text x={W - 96} y={PAD.t + 14} fontSize="10" fill="#94A3B8">Hoy</text>
+      <line x1={W - 120} x2={W - 100} y1={PAD.t + 10} y2={PAD.t + 10} stroke="#3D7FC1" strokeWidth="2" />
+      <text x={W - 96} y={PAD.t + 14} fontSize="10" fill="#B8C4D0">Hoy</text>
       {curve1y && <>
         <line x1={W - 120} x2={W - 100} y1={PAD.t + 26} y2={PAD.t + 26}
-              stroke="#64748B" strokeWidth="2" strokeDasharray="5,3" />
-        <text x={W - 96} y={PAD.t + 30} fontSize="10" fill="#64748B">Hace 1 año</text>
+              stroke="#4A5A6B" strokeWidth="2" strokeDasharray="5,3" />
+        <text x={W - 96} y={PAD.t + 30} fontSize="10" fill="#6B7E93">Hace 1 año</text>
       </>}
     </svg>
   );
@@ -131,24 +131,24 @@ function SpreadHistoryChart({ history }) {
     <svg viewBox={`0 0 ${W} ${H}`} className="chart-svg">
       <defs>
         <linearGradient id="spreadGrad" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.02" />
+          <stop offset="0%" stopColor="#3D7FC1" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#3D7FC1" stopOpacity="0.02" />
         </linearGradient>
       </defs>
       {/* baseline */}
       <line x1={PAD.l} x2={W - PAD.r} y1={y0} y2={y0}
-            stroke="#EF4444" strokeWidth="1" strokeDasharray="4,3" />
+            stroke="#B86A58" strokeWidth="1" strokeDasharray="4,3" />
       {/* area */}
       <path d={areaPath} fill="url(#spreadGrad)" />
       {/* line */}
-      <path d={linePath} fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+      <path d={linePath} fill="none" stroke="#3D7FC1" strokeWidth="1.5" />
       {/* Y axis labels */}
       {[-3, -2, -1, 0, 1, 2, 3].filter(v => v >= minS && v <= maxS).map(v => (
         <g key={v}>
           <line x1={PAD.l} x2={W - PAD.r} y1={yPos(v)} y2={yPos(v)}
-                stroke="#2A2D3A" strokeWidth="1" />
+                stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
           <text x={PAD.l - 6} y={yPos(v) + 4} textAnchor="end"
-                fontSize="10" fill="#64748B">{v >= 0 ? `+${v}` : v}pp</text>
+                fontSize="10" fill="#6B7E93">{v >= 0 ? `+${v}` : v}pp</text>
         </g>
       ))}
       {/* X axis years */}
@@ -157,7 +157,7 @@ function SpreadHistoryChart({ history }) {
         if (idx < 0) return null;
         return (
           <text key={y} x={xPos(idx)} y={H - 6} textAnchor="middle"
-                fontSize="10" fill="#64748B">{y}</text>
+                fontSize="10" fill="#6B7E93">{y}</text>
         );
       })}
     </svg>
@@ -204,15 +204,15 @@ function MultiLineChart({ series, yLabel = "%", yMin, yMax, startYear = "2000", 
       {gridVals.map(v => (
         <g key={v}>
           <line x1={PAD.l} x2={W - PAD.r} y1={yPos(v)} y2={yPos(v)}
-                stroke="#2A2D3A" strokeWidth="1" />
+                stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
           <text x={PAD.l - 6} y={yPos(v) + 4} textAnchor="end"
-                fontSize="10" fill="#64748B">{v}{yLabel}</text>
+                fontSize="10" fill="#6B7E93">{v}{yLabel}</text>
         </g>
       ))}
       {/* reference line */}
       {refLine != null && (
         <line x1={PAD.l} x2={W - PAD.r} y1={yPos(refLine)} y2={yPos(refLine)}
-              stroke="#F59E0B" strokeWidth="1" strokeDasharray="5,3" />
+              stroke="#C4A35A" strokeWidth="1" strokeDasharray="5,3" />
       )}
       {/* series */}
       {series.map((s) => (
@@ -227,7 +227,7 @@ function MultiLineChart({ series, yLabel = "%", yMin, yMax, startYear = "2000", 
         return (
           <g key={s.label + "_dot"}>
             <circle cx={xPos(last.date)} cy={yPos(last.value)} r="4"
-                    fill={s.color} stroke="#0F1117" strokeWidth="1.5" />
+                    fill={s.color} stroke="#111720" strokeWidth="1.5" />
             <text x={xPos(last.date) - 6} y={yPos(last.value) - 8}
                   textAnchor="end" fontSize="10" fill={s.color} fontWeight="700">
               {last.value.toFixed(1)}{yLabel}
@@ -241,7 +241,7 @@ function MultiLineChart({ series, yLabel = "%", yMin, yMax, startYear = "2000", 
         if (!d) return null;
         return (
           <text key={y} x={xPos(d)} y={H - 6} textAnchor="middle"
-                fontSize="10" fill="#64748B">{y}</text>
+                fontSize="10" fill="#6B7E93">{y}</text>
         );
       })}
       {/* legend */}
@@ -249,7 +249,7 @@ function MultiLineChart({ series, yLabel = "%", yMin, yMax, startYear = "2000", 
         <g key={s.label + "_leg"} transform={`translate(${PAD.l + i * 130}, ${H - 8})`}>
           <line x1="0" x2="16" y1="-4" y2="-4"
                 stroke={s.color} strokeWidth="2" strokeDasharray={s.dash ?? "none"} />
-          <text x="20" y="0" fontSize="10" fill="#94A3B8">{s.label}</text>
+          <text x="20" y="0" fontSize="10" fill="#B8C4D0">{s.label}</text>
         </g>
       ))}
     </svg>
@@ -452,14 +452,14 @@ function TabMacro({ data }) {
   const macro = data?.macro ?? {};
 
   const usCpiSeries = [
-    { label: "IPC total",     color: "#3B82F6", data: (macro.us_cpi_history ?? []).map(d => ({ date: d.date, value: d.cpi })) },
-    { label: "IPC subyacente",color: "#F59E0B", dash: "5,3", data: (macro.us_cpi_history ?? []).map(d => ({ date: d.date, value: d.core })).filter(d => d.value != null) },
+    { label: "IPC total",     color: "#3D7FC1", data: (macro.us_cpi_history ?? []).map(d => ({ date: d.date, value: d.cpi })) },
+    { label: "IPC subyacente",color: "#C4A35A", dash: "5,3", data: (macro.us_cpi_history ?? []).map(d => ({ date: d.date, value: d.core })).filter(d => d.value != null) },
   ];
   const euCpiSeries = [
-    { label: "HICP total", color: "#22C55E", data: (macro.eu_cpi_history ?? []).map(d => ({ date: d.date, value: d.cpi })) },
+    { label: "HICP total", color: "#5BAD8A", data: (macro.eu_cpi_history ?? []).map(d => ({ date: d.date, value: d.cpi })) },
   ];
   const m2Series = [
-    { label: "M2 YoY EE.UU.", color: "#A78BFA", data: (macro.m2_history ?? []).map(d => ({ date: d.date, value: d.m2_yoy })) },
+    { label: "M2 YoY EE.UU.", color: "#8A7FC4", data: (macro.m2_history ?? []).map(d => ({ date: d.date, value: d.m2_yoy })) },
   ];
 
   return (
