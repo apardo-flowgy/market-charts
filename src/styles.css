@@ -2,26 +2,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap');
 
 :root {
-  /* Paleta institucional oscura */
-  --bg:       #111720;
-  --bg2:      #0D1219;
-  --surface:  #17202E;
-  --surface2: #1E2A3A;
-  --border:   rgba(255,255,255,0.07);
-  --border2:  rgba(255,255,255,0.12);
-  --text:     #EEF1F5;
-  --text2:    #B8C4D0;
-  --muted:    #6B7E93;
-  --muted2:   #4A5A6B;
-  --accent:   #3D7FC1;
-  --gold:     #C4A35A;
-  --green:    #5BAD8A;
-  --red:      #B86A58;
-  --amber:    #C4A35A;
-  --purple:   #8A7FC4;
+  /* Tema claro editorial */
+  --bg:       #F5F6F8;
+  --bg2:      #FFFFFF;
+  --surface:  #FFFFFF;
+  --surface2: #F0F2F5;
+  --border:   rgba(0,0,0,0.08);
+  --border2:  rgba(0,0,0,0.14);
+  --text:     #1A2232;
+  --text2:    #3A4A5C;
+  --muted:    #6B7A8D;
+  --muted2:   #9AAABB;
+  --accent:   #1D4E89;        /* azul marino institucional */
+  --gold:     #9A7A2E;
+  --green:    #2E7D5A;
+  --red:      #A33B2A;
+  --amber:    #9A7A2E;
+  --purple:   #5A4E9A;
   --radius:   4px;
   --radius-lg: 8px;
-  --shadow:   0 1px 4px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.2);
+  --shadow:   0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.05);
 
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 14px;
@@ -39,7 +39,6 @@ body {
 
 button { font: inherit; cursor: pointer; }
 
-/* Números tabulares */
 .tabular { font-variant-numeric: tabular-nums; }
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
@@ -49,6 +48,7 @@ button { font: inherit; cursor: pointer; }
   position: sticky;
   top: 0;
   z-index: 40;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
 .header-inner {
@@ -70,9 +70,9 @@ button { font: inherit; cursor: pointer; }
 
 .header-logo {
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   display: flex;
   align-items: center;
   padding-right: 28px;
@@ -81,7 +81,7 @@ button { font: inherit; cursor: pointer; }
 }
 .header-logo span { color: var(--accent); font-weight: 400; }
 
-/* ── Nav tabs — subrayado estilo editorial ── */
+/* ── Nav tabs — subrayado ── */
 .nav-tabs {
   display: flex;
   align-items: stretch;
@@ -94,9 +94,9 @@ button { font: inherit; cursor: pointer; }
   border-bottom: 2px solid transparent;
   color: var(--muted);
   padding: 0 18px;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: color 0.15s, border-color 0.15s;
   white-space: nowrap;
@@ -107,7 +107,7 @@ button { font: inherit; cursor: pointer; }
 
 .nav-tab:hover { color: var(--text2); }
 .nav-tab.active {
-  color: var(--text);
+  color: var(--accent);
   border-bottom-color: var(--accent);
   font-weight: 600;
 }
@@ -121,7 +121,7 @@ button { font: inherit; cursor: pointer; }
   flex-direction: column;
   justify-content: center;
 }
-.header-meta strong { color: var(--text2); font-weight: 500; }
+.header-meta strong { color: var(--text2); font-weight: 600; }
 
 /* ── Main ────────────────────────────────────────────────────────────────── */
 .app-main {
@@ -151,6 +151,7 @@ button { font: inherit; cursor: pointer; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 22px 26px 18px;
+  box-shadow: var(--shadow);
 }
 
 .chart-card-header { margin-bottom: 18px; }
@@ -191,7 +192,7 @@ button { font: inherit; cursor: pointer; }
   gap: 16px;
 }
 
-/* ── Metric strip — texto limpio sin caja ── */
+/* ── Metric strip ── */
 .metric-strip {
   display: flex;
   gap: 0;
@@ -235,14 +236,22 @@ button { font: inherit; cursor: pointer; }
   margin-top: 4px;
 }
 
-.text-green  { color: var(--green) !important;  }
-.text-red    { color: var(--red) !important;    }
+.text-green  { color: var(--green)  !important; }
+.text-red    { color: var(--red)    !important; }
 .text-accent { color: var(--accent) !important; }
-.text-gold   { color: var(--gold) !important;   }
+.text-gold   { color: var(--gold)   !important; }
 .text-blue   { color: var(--accent) !important; }
 
 /* ── Chart SVG ── */
 .chart-svg { width: 100%; height: auto; display: block; }
+
+/* ── PNG chart images: integración perfecta en tema claro ── */
+.chart-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+}
 
 /* ── Placeholder ── */
 .chart-placeholder {
@@ -257,9 +266,10 @@ button { font: inherit; cursor: pointer; }
   color: var(--muted2);
   font-size: 0.76rem;
   letter-spacing: 0.02em;
+  background: var(--surface2);
 }
 
-.chart-placeholder-icon { font-size: 1.4rem; opacity: 0.25; }
+.chart-placeholder-icon { font-size: 1.4rem; opacity: 0.3; }
 
 /* ── Legend ── */
 .legend {
@@ -305,8 +315,7 @@ button { font: inherit; cursor: pointer; }
   .app-main { padding: 24px 20px 64px; gap: 24px; }
   .nav-tabs { border-top: 1px solid var(--border); padding: 4px 0; }
   .nav-tab { padding: 8px 14px; border-bottom: none; height: auto; }
-  .nav-tab.active { color: var(--accent); border-bottom: none; }
-  .metric-strip { gap: 0; }
+  .nav-tab.active { border-bottom: none; }
   .metric-chip { padding: 10px 16px 8px 0; margin-right: 16px; }
   .metric-chip-value { font-size: 1.2rem; }
 }
